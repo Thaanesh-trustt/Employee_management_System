@@ -1,6 +1,7 @@
 package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Employee;
+import employeemanagement.com.employees.Model.Role;
 import employeemanagement.com.employees.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,11 +39,9 @@ public class EmployeeController {
         }
         return theEmployee;
     }
-    @PutMapping("/employees")
-    public Employee updateEmployee(@RequestBody Employee theEmployee)
-    {
-        Employee dbEmployee=employeeService.save(theEmployee);
-        return dbEmployee;
+    @PutMapping("employees/{emp_id}")
+    public Employee updateEmployee(@PathVariable int emp_id, @RequestBody Employee updatedEmployee) {
+        return employeeService.update(emp_id, updatedEmployee);
     }
     @DeleteMapping("/employees/{emp_id}")
     private void deleteEmployee(@PathVariable("emp_id") int emp_id)

@@ -1,6 +1,7 @@
 package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Department;
+import employeemanagement.com.employees.Model.Role;
 import employeemanagement.com.employees.Service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,11 +40,9 @@ public class DepartmentController {
         }
         return theDepartment;
     }
-    @PutMapping("/Departments")
-    public Department updateDepartment(@RequestBody Department theDepartment)
-    {
-        Department thedepartment=theDepartmentService.save(theDepartment);
-        return theDepartment;
+    @PutMapping("/Departments/{dept_id}")
+    public Department updateDepartment(@PathVariable int dept_id, @RequestBody Department updateDepartment) {
+        return theDepartmentService.update(dept_id, updateDepartment);
     }
     @DeleteMapping("/Departments/{dept_id}")
     private void deleteById(@PathVariable("dept_id") int dept_id)

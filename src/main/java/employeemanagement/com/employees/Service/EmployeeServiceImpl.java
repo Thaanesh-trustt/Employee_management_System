@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.EmployeeRepository;
 import employeemanagement.com.employees.Model.Employee;
+import employeemanagement.com.employees.Model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,12 +39,28 @@ public class EmployeeServiceImpl implements EmployeeService{
         return theEmployee;
     }
 
-    @Transactional
     @Override
-    public void deleteById(int empId) {
-        employeeRepository.deleteById(empId);
+    public Employee update(int emp_id, Employee updatedEmployee) {
+        Employee existingEmployee = employeeRepository.findById(emp_id).orElse(null);
+        if (existingEmployee != null) {
+            existingEmployee.setEmp_name(updatedEmployee.getEmp_name());
+            existingEmployee.setPhn_number(updatedEmployee.getPhn_number());
+            existingEmployee.setGender(updatedEmployee.getGender());
+            existingEmployee.setEmail(updatedEmployee.getEmail());
+            existingEmployee.setAddress(updatedEmployee.getAddress());
+            existingEmployee.setAccount_number(updatedEmployee.getAccount_number());
+            return employeeRepository.save(existingEmployee);
+        }
+        else {
+            throw new RuntimeException("Employee with ID " + emp_id + " not found");
+        }
+
 
     }
 
-
+    @Override
+    public void deleteById(int emp_id) {
+            employeeRepository.deleteById(emp_id);
+    }
 }
+
