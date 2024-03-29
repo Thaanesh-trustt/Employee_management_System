@@ -11,7 +11,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class EmployeeController {
     private EmployeeService employeeService;
     @Autowired
