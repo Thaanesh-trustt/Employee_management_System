@@ -55,8 +55,7 @@ public class PayrollServiceImpl implements PayrollService{
             }
             return thePayroll;
         }
-
-    @Override
+        @Override
     public void deleteById(int payroll_id) {
         thePayrollRepository.deleteById(payroll_id);
     }
