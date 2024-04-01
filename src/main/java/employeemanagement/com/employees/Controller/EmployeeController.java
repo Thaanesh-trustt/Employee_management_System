@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.EnumMap;
 import java.util.List;
-
+//added rest controller
+//added cross origin
 @RestController
 @CrossOrigin
 //@RequestMapping("/api")
