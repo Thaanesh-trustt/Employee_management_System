@@ -1,12 +1,14 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 //import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@Data
 @Table(name = "attendance")
 public class Attendance {
     @Id

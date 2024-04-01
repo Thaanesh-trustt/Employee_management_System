@@ -1,8 +1,10 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name="Department")
 public class Department {
     @Id
