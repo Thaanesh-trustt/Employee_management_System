@@ -10,16 +10,22 @@ import lombok.Data;
 public class Payroll {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int payroll_id;
+    private int id;
 
     @Column(name="amount")
     private long amount;
 
-    @Column(name="emp_id")
-    private int emp_id;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="empId")
+    private Employee employee;
 
-    @Column(name="role_id")
-    private int role_id;
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     public Payroll()
     {
@@ -28,16 +34,14 @@ public class Payroll {
 
     public Payroll(long amount, int emp_id, int role_id) {
         this.amount = amount;
-        this.emp_id = emp_id;
-        this.role_id = role_id;
     }
 
     public int getPayroll_id() {
-        return payroll_id;
+        return id;
     }
 
     public void setPayroll_id(int payroll_id) {
-        this.payroll_id = payroll_id;
+        this.id = payroll_id;
     }
 
     public long getAmount() {
@@ -48,29 +52,11 @@ public class Payroll {
         this.amount = amount;
     }
 
-    public int getEmp_id() {
-        return emp_id;
-    }
-
-    public void setEmp_id(int emp_id) {
-        this.emp_id = emp_id;
-    }
-
-    public int getRole_id() {
-        return role_id;
-    }
-
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
-    }
-
     @Override
     public String toString() {
         return "Payroll{" +
-                "payroll_id=" + payroll_id +
+                "payroll_id=" + id +
                 ", amount=" + amount +
-                ", emp_id=" + emp_id +
-                ", role_id=" + role_id +
                 '}';
     }
 }

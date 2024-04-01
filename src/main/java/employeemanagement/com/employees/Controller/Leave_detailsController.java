@@ -1,7 +1,8 @@
 package employeemanagement.com.employees.Controller;
 
-import employeemanagement.com.employees.DAO.Leave_detailsRepository;
+import employeemanagement.com.employees.Model.Employee;
 import employeemanagement.com.employees.Model.Leave_details;
+import employeemanagement.com.employees.Service.EmployeeService;
 import employeemanagement.com.employees.Service.Leave_detailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +14,18 @@ import java.util.List;
 @CrossOrigin
 public class Leave_detailsController {
     private Leave_detailsService theLeave_detailsService;
+    private EmployeeService theEmployeeService;
     @Autowired
 
-    public Leave_detailsController(Leave_detailsService theLeave_detailsService) {
+    public Leave_detailsController(Leave_detailsService theLeave_detailsService, EmployeeService employeeService) {
         this.theLeave_detailsService = theLeave_detailsService;
+        theEmployeeService = employeeService;
     }
-    @PostMapping("/addLeave")
-    public Leave_details addLeave(@RequestBody Leave_details theLeave_details)
+    @PostMapping("/addLeave/{empId}")
+    public Leave_details addLeave(@PathVariable(value="empId") int id, @RequestBody Leave_details theLeave_details)
     {
+        Employee emp = theEmployeeService.findById(id);
+        theLeave_details.setEmployee(emp);
         return theLeave_detailsService.save(theLeave_details);
     }
     @GetMapping("/Leave_details")

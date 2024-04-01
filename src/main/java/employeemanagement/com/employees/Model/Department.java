@@ -3,59 +3,53 @@ package employeemanagement.com.employees.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name="Department")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int dept_id;
+    private int id;
 
-    @Column(name="dept_name")
-    private String dept_name;
+    @Column(name="name")
+    private String name;
 
-    @Column(name="emp_id")
-    private int emp_id;
+    @OneToMany(mappedBy = "department",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<Employee> employees;
+
     public Department()
     {
 
     }
 
-    public Department(String dept_name, int emp_id) {
-        this.dept_name = dept_name;
-        this.emp_id = emp_id;
+    public Department(String name, int emp_id) {
+        this.name = name;
     }
 
-    public int getDept_id() {
-        return dept_id;
+    public int getId() {
+        return id;
     }
 
-    public void setDept_id(int dept_id) {
-        this.dept_id = dept_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDept_name() {
-        return dept_name;
+    public String getName() {
+        return name;
     }
 
-    public void setDept_name(String dept_name) {
-        this.dept_name = dept_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getEmp_id() {
-        return emp_id;
-    }
-
-    public void setEmp_id(int emp_id) {
-        this.emp_id = emp_id;
-    }
 
     @Override
     public String toString() {
         return "Department{" +
-                "dept_id=" + dept_id +
-                ", dept_name='" + dept_name + '\'' +
-                ", emp_id=" + emp_id +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

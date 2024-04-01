@@ -1,7 +1,6 @@
 package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Department;
-import employeemanagement.com.employees.Model.Role;
 import employeemanagement.com.employees.Service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,5 +47,10 @@ public class DepartmentController {
     private void deleteById(@PathVariable("dept_id") int dept_id)
     {
         theDepartmentService.deleteById(dept_id);
+    }
+
+    @GetMapping("/getDept/{dept}")
+    public Department findByName(@PathVariable(value="dept") String name){
+        return theDepartmentService.findByDeptName(name);
     }
 }
