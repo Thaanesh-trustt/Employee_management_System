@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class AttendanceController {
     private AttendanceService attendanceService;
     @Autowired

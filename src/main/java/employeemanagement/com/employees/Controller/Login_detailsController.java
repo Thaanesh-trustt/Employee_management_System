@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class Login_detailsController {
     private Login_detailsService theLogin_detailsService;
     @Autowired

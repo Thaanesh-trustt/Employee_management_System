@@ -11,6 +11,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 //@RequestMapping("/api")
 public class EmployeeController {
     private EmployeeService employeeService;
