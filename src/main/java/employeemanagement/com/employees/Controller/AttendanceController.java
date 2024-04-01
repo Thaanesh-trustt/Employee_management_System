@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import employeemanagement.com.employees.Model.Employee;
 
 import java.util.List;
-
 @RestController
+@CrossOrigin
 public class AttendanceController {
     private AttendanceService attendanceService;
     private EmployeeService employeeService;

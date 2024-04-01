@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//added rest controller
+//added cross origin
 @RestController
+@CrossOrigin
 
 public class RoleController {
     private RoleService theRoleService;
@@ -36,7 +38,7 @@ public class RoleController {
         }
         return theRole;
     }
-    @PutMapping("Roles/{id}")
+    @PutMapping("/Roles/{id}")
     public Role updateRole(@PathVariable int id, @RequestBody Role updatedRole) {
         return theRoleService.update(id, updatedRole);
     }

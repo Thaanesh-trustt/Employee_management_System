@@ -1,9 +1,12 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
+import jdk.jfr.DataAmount;
+import lombok.Data;
 import org.hibernate.annotations.CollectionId;
 
 @Entity
+@Data
 @Table(name="Login_details")
 public class Login_details {
     @Id
