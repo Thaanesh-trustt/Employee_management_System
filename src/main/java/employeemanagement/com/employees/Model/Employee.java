@@ -2,16 +2,18 @@ package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="emp_id")
-    private int  emp_id;
+    @Column(name="id")
+    private int  id;
 
-    @Column(name="emp_name")
-    private String emp_name;
+    @Column(name="name")
+    private String name;
 
     @Column(nullable = false)
     private long phn_number;
@@ -26,12 +28,47 @@ public class Employee {
 
     @Column(name="account_number")
     private long account_number;
+
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL})
+    private List<Attendance> attendance;
+
+    @OneToMany(mappedBy = "employee",cascade = {CascadeType.ALL})
+    private List<Leave_details>leaveDetails;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name="dept_id")
+    private Department department;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name="role")
+    private Role role;
+
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
+    private Payroll payroll;
+
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public Employee()
     {
 
     }
     public Employee(String emp_name, long phn_number, String gender, String email, String address, long account_number) {
-        this.emp_name = emp_name;
+        this.name = emp_name;
         this.phn_number = phn_number;
         this.gender = gender;
         this.email = email;
@@ -40,19 +77,19 @@ public class Employee {
     }
 
     public int getEmp_id() {
-        return emp_id;
+        return id;
     }
 
     public void setEmp_id(int emp_id) {
-        this.emp_id = emp_id;
+        this.id = emp_id;
     }
 
     public String getEmp_name() {
-        return emp_name;
+        return name;
     }
 
     public void setEmp_name(String emp_name) {
-        this.emp_name = emp_name;
+        this.name = emp_name;
     }
 
     public long getPhn_number() {
@@ -98,8 +135,8 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "emp_id=" + emp_id +
-                ", emp_name='" + emp_name + '\'' +
+                "emp_id=" + id +
+                ", emp_name='" + name + '\'' +
                 ", phn_number=" + phn_number +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
@@ -107,4 +144,13 @@ public class Employee {
                 ", account_number=" + account_number +
                 '}';
     }
+
+//    adding convenience method for bi-directional mapping
+//    public  void add(Attendance tempAttendance){
+//        if(attendance == null){
+//            attendance = new ArrayList<>();
+//        }
+//        attendance.add(tempAttendance);
+//        tempAttendance.setEmployee(this);
+//    }
 }

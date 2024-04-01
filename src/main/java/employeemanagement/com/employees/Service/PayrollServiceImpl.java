@@ -1,7 +1,6 @@
 package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.PayrollRepository;
-import employeemanagement.com.employees.Model.Department;
 import employeemanagement.com.employees.Model.Payroll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +32,6 @@ public class PayrollServiceImpl implements PayrollService{
         Payroll existingPayroll=thePayrollRepository.findById(payroll_id).orElse(null);
         if(existingPayroll!=null)
         {
-            existingPayroll.setEmp_id(updatePayroll.getEmp_id());
-            existingPayroll.setRole_id(updatePayroll.getRole_id());
             existingPayroll.setAmount(updatePayroll.getAmount());
             return thePayrollRepository.save(existingPayroll);
         }

@@ -42,8 +42,6 @@ public class RoleServiceImpl implements RoleService {
     public Role update(int id, Role updatedRole) {
         Role existingRole = roleRepository.findById(id).orElse(null);
         if (existingRole != null) {
-            existingRole.setDept_id(updatedRole.getDept_id());
-            existingRole.setEmp_id(updatedRole.getEmp_id());
             existingRole.setRole_name(updatedRole.getRole_name());
 
         }
@@ -53,5 +51,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void deleteById(int theId) {
         roleRepository.deleteById(theId);
+    }
+
+    @Override
+    public Role findByRole(String role) {
+        return roleRepository.findByRoleName(role);
     }
 }

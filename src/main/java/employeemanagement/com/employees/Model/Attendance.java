@@ -13,20 +13,32 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "emp_id")
-    private int emp_id;
     @Column(name = "presentdate")
     private LocalDate presentdate;
+
     @Column(name = "check_in")
     private LocalTime check_in;
+
     @Column(name = "check_out")
     private LocalTime check_out;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "emp_id")
+    private Employee employee;
+
     public Attendance(){
 
     }
 
-    public Attendance(int emp_id, LocalDate presentdate, LocalTime check_in, LocalTime check_out) {
-        this.emp_id = emp_id;
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Attendance(LocalDate presentdate, LocalTime check_in, LocalTime check_out) {
         this.presentdate = presentdate;
         this.check_in = check_in;
         this.check_out = check_out;
@@ -38,14 +50,6 @@ public class Attendance {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getEmp_id() {
-        return emp_id;
-    }
-
-    public void setEmp_id(int emp_id) {
-        this.emp_id = emp_id;
     }
 
     public LocalDate getPresentdate() {

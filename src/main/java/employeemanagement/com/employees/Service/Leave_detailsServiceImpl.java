@@ -50,7 +50,6 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
                 existingLeaveDetails.setLeave_type(updateLeave_details.getLeave_type());
                 existingLeaveDetails.setFrom_date(updateLeave_details.getFrom_date());
                 existingLeaveDetails.setTo_date(updateLeave_details.getTo_date());
-                existingLeaveDetails.setEmp_id(updateLeave_details.getEmp_id());
                 existingLeaveDetails.setApplying_to(updateLeave_details.getApplying_to());
                 existingLeaveDetails.setReason(updateLeave_details.getReason());
                 // Save the updated entity

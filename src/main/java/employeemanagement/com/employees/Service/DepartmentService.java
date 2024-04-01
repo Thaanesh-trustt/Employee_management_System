@@ -1,7 +1,6 @@
 package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.Model.Department;
-import employeemanagement.com.employees.Model.Role;
 
 import java.util.List;
 
@@ -13,4 +12,6 @@ public interface DepartmentService {
     void deleteById(int id);
 
     Department update(int id, Department updateDepartment);
+
+    Department findByDeptName(String dept);
 }

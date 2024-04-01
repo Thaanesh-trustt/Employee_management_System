@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Employee;
 import employeemanagement.com.employees.Model.Payroll;
+import employeemanagement.com.employees.Service.EmployeeService;
 import employeemanagement.com.employees.Service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +12,18 @@ import java.util.List;
 @RestController
 public class PayrollController {
     private PayrollService thePayrollService;
+    private EmployeeService theEmployeService;
     @Autowired
-    public PayrollController(PayrollService thePayrollService) {
+    public PayrollController(PayrollService thePayrollService,EmployeeService employeeService) {
         this.thePayrollService = thePayrollService;
+        theEmployeService = employeeService;
     }
-    @PostMapping("/addPayroll")
-    public Payroll addPayroll(@RequestBody Payroll thePayroll)
+    @PostMapping("/addPayroll/{empId}")
+    public Payroll addPayroll(@PathVariable(value="empId") int id,@RequestBody Payroll thePayroll)
     {
+        Employee emp = theEmployeService.findById(id);
+        thePayroll.setEmployee(emp);
+
         Payroll payroll=thePayrollService.save(thePayroll);
         return payroll;
     }

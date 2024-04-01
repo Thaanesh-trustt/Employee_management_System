@@ -2,18 +2,21 @@ package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Attendance;
 import employeemanagement.com.employees.Service.AttendanceService;
+import employeemanagement.com.employees.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import employeemanagement.com.employees.Model.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class AttendanceController {
     private AttendanceService attendanceService;
+    private EmployeeService employeeService;
     @Autowired
-    public AttendanceController(AttendanceService attendanceService){
+    public AttendanceController(AttendanceService attendanceService,EmployeeService employeeService){
         this.attendanceService=attendanceService;
+        this.employeeService = employeeService;
     }
     @GetMapping("/attendance")
     public List<Attendance> findAll(){
@@ -21,8 +24,10 @@ public class AttendanceController {
         return attendanceService.findAll();
     }
 
-    @PostMapping("/addAttendance")
-    public Attendance addAttendance(@RequestBody Attendance attendance){
+    @PostMapping("/addAttendance/{empId}")
+    public Attendance addAttendance(@PathVariable(value="empId") int empId,@RequestBody Attendance attendance){
+        Employee data = employeeService.findById(empId);
+        attendance.setEmployee(data);
         return attendanceService.save(attendance);
 
     }
