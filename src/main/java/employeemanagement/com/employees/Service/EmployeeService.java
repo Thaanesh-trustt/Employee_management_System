@@ -1,7 +1,6 @@
 package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.Model.Employee;
-import employeemanagement.com.employees.Model.Role;
 
 import java.util.List;
 
@@ -14,4 +13,5 @@ public interface EmployeeService {
     Employee update(int emp_id, Employee updatedEmployee);
     void deleteById(int emp_id);
 
+    Employee findByEmail(String email);
 }

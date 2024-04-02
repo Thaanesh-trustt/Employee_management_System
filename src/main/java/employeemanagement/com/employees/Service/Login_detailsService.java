@@ -11,7 +11,7 @@ public interface Login_detailsService {
     Login_details findById(int id);
     Login_details update(int id,Login_details updateLogin_details);
 
-  void deleteById(int id);
+    void deleteById(int id);
 
-
+    Login_details findByEmail(String email);
 }
