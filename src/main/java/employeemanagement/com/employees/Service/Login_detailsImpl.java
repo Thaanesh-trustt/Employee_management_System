@@ -2,7 +2,6 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.Login_detailsRepository;
 import employeemanagement.com.employees.Model.Login_details;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +57,11 @@ public class Login_detailsImpl implements Login_detailsService{
     @Override
     public void  deleteById(int id) {
          theLogin_detailsRepository.deleteById(id);
+    }
+
+    @Override
+    public Login_details findByEmail(String email) {
+        return theLogin_detailsRepository.findByEmail(email);
     }
 
 }

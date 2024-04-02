@@ -51,6 +51,11 @@ public class EmployeeController {
         }
         return theEmployee;
     }
+    @GetMapping("/employee/{email}")
+    public Employee getEmail(@PathVariable(value="email") String email){
+        Employee theEmployee = employeeService.findByEmail(email);
+        return theEmployee;
+    }
     @PutMapping("/employees/{emp_id}")
     public Employee updateEmployee(@PathVariable int emp_id, @RequestBody Employee updatedEmployee) {
         return employeeService.update(emp_id, updatedEmployee);

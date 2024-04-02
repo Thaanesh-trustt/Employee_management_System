@@ -2,10 +2,8 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.EmployeeRepository;
 import employeemanagement.com.employees.Model.Employee;
-import employeemanagement.com.employees.Model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +59,11 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public void deleteById(int emp_id) {
             employeeRepository.deleteById(emp_id);
+    }
+
+    @Override
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
     }
 }
 

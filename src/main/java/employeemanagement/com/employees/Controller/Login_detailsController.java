@@ -3,9 +3,14 @@ package employeemanagement.com.employees.Controller;
 import employeemanagement.com.employees.Model.Login_details;
 import employeemanagement.com.employees.Service.Login_detailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 //added rest controller
 //added cross origin
 @RestController
@@ -23,7 +28,31 @@ public class Login_detailsController {
         Login_details login=theLogin_detailsService.save(theLogin_Details);
         return login;
     }
-    @GetMapping("/Logins")
+    @PostMapping("/login")
+    public ResponseEntity<Map<String,Object>> login(@RequestBody Login_details thelogin){
+        String email = thelogin.getEmail();
+        Login_details login = theLogin_detailsService.findByEmail(email);
+        Map<String, Object> result = new HashMap<>();
+        String msg = "";
+        boolean authenticated = false;
+
+        if(login != null){
+            if(thelogin.getPassword().equals(login.getPassword())){
+                authenticated = true;
+                msg = "Login Successfull";
+                }
+            else{
+                msg = "Wrong Password";
+            }
+        }
+        else{
+            msg="email Not found";
+        }
+        result.put("message",msg);
+        result.put("success",authenticated);
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+    @GetMapping("/getLogins")
     public List<Login_details> findAll()
     {
         return theLogin_detailsService.findAll();
@@ -49,4 +78,9 @@ public class Login_detailsController {
         theLogin_detailsService.deleteById(id);
     }
 
+//    @GetMapping("/getEmail")
+//    public Login_details findByEmail(@RequestBody String email){
+//        System.out.println(email);
+//        return theLogin_detailsService.findByEmail(email);
+//    }
 }
