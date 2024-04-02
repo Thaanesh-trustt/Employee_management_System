@@ -8,4 +8,5 @@ public interface RoleRepository extends JpaRepository<Role,Integer> {
 
     @Query("select u from Role u where name = ?1")
     Role findByRoleName(String role);
+
 }

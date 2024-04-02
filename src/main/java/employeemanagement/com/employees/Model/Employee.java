@@ -31,7 +31,7 @@ public class Employee {
     @Column(name="account_number")
     private long account_number;
 
-    @OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "employee")
     private List<Attendance> attendance;
 
     @OneToMany(mappedBy = "employee",cascade = {CascadeType.ALL})

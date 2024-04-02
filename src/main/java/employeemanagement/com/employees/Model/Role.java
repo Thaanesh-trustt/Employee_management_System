@@ -1,7 +1,6 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
-import jdk.jfr.DataAmount;
 import lombok.Data;
 
 import java.util.List;
@@ -19,7 +18,6 @@ public class Role {
 
     @OneToMany(mappedBy = "role",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Employee> employee;
-
 
     public  Role()
     {
