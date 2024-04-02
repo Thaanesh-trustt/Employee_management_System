@@ -1,11 +1,11 @@
 package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Attendance;
+import employeemanagement.com.employees.Model.Employee;
 import employeemanagement.com.employees.Service.AttendanceService;
 import employeemanagement.com.employees.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import employeemanagement.com.employees.Model.Employee;
 
 import java.util.List;
 @RestController
@@ -18,6 +18,7 @@ public class AttendanceController {
         this.attendanceService=attendanceService;
         this.employeeService = employeeService;
     }
+
     @GetMapping("/attendance")
     public List<Attendance> findAll(){
 

@@ -10,7 +10,6 @@ import java.util.List;
 //added cross origin
 @RestController
 @CrossOrigin
-
 public class RoleController {
     private RoleService theRoleService;
     @Autowired

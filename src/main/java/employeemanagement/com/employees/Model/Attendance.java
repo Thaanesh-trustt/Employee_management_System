@@ -24,7 +24,7 @@ public class Attendance {
     @Column(name = "check_out")
     private LocalTime check_out;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToOne()
     @JoinColumn(name = "emp_id")
     private Employee employee;
 

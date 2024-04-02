@@ -1,6 +1,9 @@
 package employeemanagement.com.employees.Controller;
 
+import employeemanagement.com.employees.Model.Employee;
 import employeemanagement.com.employees.Model.Login_details;
+import employeemanagement.com.employees.Model.Role;
+import employeemanagement.com.employees.Service.EmployeeService;
 import employeemanagement.com.employees.Service.Login_detailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +20,12 @@ import java.util.Map;
 @CrossOrigin
 public class Login_detailsController {
     private Login_detailsService theLogin_detailsService;
+    private EmployeeService theEmployeeService;
     @Autowired
 
-    public Login_detailsController(Login_detailsService theLogin_details) {
+    public Login_detailsController(Login_detailsService theLogin_details,EmployeeService theEmployeeService) {
         this.theLogin_detailsService = theLogin_details;
+        this.theEmployeeService = theEmployeeService;
     }
     @PostMapping("/addId")
     public Login_details addLogin_details(@RequestBody  Login_details theLogin_Details)
@@ -33,11 +38,22 @@ public class Login_detailsController {
         String email = thelogin.getEmail();
         Login_details login = theLogin_detailsService.findByEmail(email);
         Map<String, Object> result = new HashMap<>();
+        Employee emp = theEmployeeService.findByEmail(email);
+        Role role = null;
+        if(emp != null){
+            role = emp.getRole();
+        }
         String msg = "";
         boolean authenticated = false;
-
-        if(login != null){
+        String user = "";
+        if(login != null && emp != null){
             if(thelogin.getPassword().equals(login.getPassword())){
+                if(role.getRole_name().equals("admin")){
+                    user = "admin";
+                }
+                else{
+                    user = "employee";
+                }
                 authenticated = true;
                 msg = "Login Successfull";
                 }
@@ -48,6 +64,7 @@ public class Login_detailsController {
         else{
             msg="email Not found";
         }
+        result.put("Role",user);
         result.put("message",msg);
         result.put("success",authenticated);
         return new ResponseEntity<>(result,HttpStatus.OK);
