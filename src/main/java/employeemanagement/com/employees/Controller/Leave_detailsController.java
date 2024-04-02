@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//added rest controller
+//added cross origin
 @RestController
+@CrossOrigin
 public class Leave_detailsController {
     private Leave_detailsService theLeave_detailsService;
     private EmployeeService theEmployeeService;

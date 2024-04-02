@@ -1,10 +1,13 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
+import jdk.jfr.DataAmount;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 @Table(name="Role")
 public class Role {
     @Id

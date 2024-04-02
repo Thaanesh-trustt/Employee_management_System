@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//added rest controller
+//added cross origin
 @RestController
+@CrossOrigin
 public class Login_detailsController {
     private Login_detailsService theLogin_detailsService;
     @Autowired
