@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 //added rest controller
 //added cross origin
 @RestController
@@ -26,18 +29,28 @@ public class Login_detailsController {
         return login;
     }
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Login_details thelogin){
+    public ResponseEntity<Map<String,Object>> login(@RequestBody Login_details thelogin){
         String email = thelogin.getEmail();
         Login_details login = theLogin_detailsService.findByEmail(email);
+        Map<String, Object> result = new HashMap<>();
+        String msg = "";
+        boolean authenticated = false;
+
         if(login != null){
             if(thelogin.getPassword().equals(login.getPassword())){
-                return new ResponseEntity<>("Login Successfull", HttpStatus.ACCEPTED);
-            }
+                authenticated = true;
+                msg = "Login Successfull";
+                }
             else{
-                return new ResponseEntity<>("Wrong Password",HttpStatus.BAD_REQUEST);
+                msg = "Wrong Password";
             }
         }
-        return new ResponseEntity<>("Email Not Found",HttpStatus.BAD_REQUEST);
+        else{
+            msg="email Not found";
+        }
+        result.put("message",msg);
+        result.put("success",authenticated);
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
     @GetMapping("/getLogins")
     public List<Login_details> findAll()
