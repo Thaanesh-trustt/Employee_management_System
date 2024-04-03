@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.Login_detailsRepository;
 import employeemanagement.com.employees.Model.Login_details;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class Login_detailsImpl implements Login_detailsService{
     }
 
     @Override
+    @Transactional
     public Login_details save(Login_details theLogin_details) {
         return theLogin_detailsRepository.save(theLogin_details);
     }
@@ -43,6 +45,7 @@ public class Login_detailsImpl implements Login_detailsService{
     }
 
     @Override
+    @Transactional
     public Login_details update(int id, Login_details updateLogin_details) {
         Login_details existingDetails=theLogin_detailsRepository.findById(id).orElse(null);
          if(existingDetails!=null)
@@ -55,6 +58,7 @@ public class Login_detailsImpl implements Login_detailsService{
     }
 
     @Override
+    @Transactional
     public void  deleteById(int id) {
          theLogin_detailsRepository.deleteById(id);
     }

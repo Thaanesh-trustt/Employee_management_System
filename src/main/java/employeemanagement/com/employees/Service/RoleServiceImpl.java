@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.RoleRepository;
 import employeemanagement.com.employees.Model.Role;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public Role save(Role theRole) {
         return roleRepository.save(theRole);
     }
@@ -49,11 +51,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int theId) {
         roleRepository.deleteById(theId);
     }
 
     @Override
+    @Transactional
     public Role findByRole(String role) {
         return roleRepository.findByRoleName(role);
     }

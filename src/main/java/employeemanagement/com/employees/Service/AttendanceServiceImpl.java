@@ -43,6 +43,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
+    @Transactional
     public Attendance update(int id, Attendance updateAttendance) {
         if(theAttendanceRepository.findById(id).isPresent())
         {
@@ -56,6 +57,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         theAttendanceRepository.deleteById(id);
     }

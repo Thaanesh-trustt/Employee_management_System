@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.PayrollRepository;
 import employeemanagement.com.employees.Model.Payroll;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class PayrollServiceImpl implements PayrollService{
     }
 
     @Override
+    @Transactional
     public Payroll save(Payroll thePayroll) {
         return thePayrollRepository.save(thePayroll);
     }
@@ -28,6 +30,7 @@ public class PayrollServiceImpl implements PayrollService{
     }
 
     @Override
+    @Transactional
     public Payroll update(int payroll_id, Payroll updatePayroll) {
         Payroll existingPayroll=thePayrollRepository.findById(payroll_id).orElse(null);
         if(existingPayroll!=null)
@@ -54,6 +57,7 @@ public class PayrollServiceImpl implements PayrollService{
         }
 
     @Override
+    @Transactional
     public void deleteById(int payroll_id) {
         thePayrollRepository.deleteById(payroll_id);
     }

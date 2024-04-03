@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.Leave_detailsRepository;
 import employeemanagement.com.employees.Model.Leave_details;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
     }
 
     @Override
+    @Transactional
     public Leave_details save(Leave_details theLeave_details) {
         return theLeave_detailsRepository.save(theLeave_details);
     }
@@ -42,6 +44,7 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
     }
 
     @Override
+    @Transactional
     public Leave_details update(int leave_id, Leave_details updateLeave_details) {
         Optional<Leave_details> leaveDetailsOptional = theLeave_detailsRepository.findById(leave_id);
             if (leaveDetailsOptional.isPresent()) {
@@ -59,6 +62,7 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
             }
 
     @Override
+    @Transactional
     public void deleteById(int leave_id) {
          theLeave_detailsRepository.deleteById(leave_id);
     }

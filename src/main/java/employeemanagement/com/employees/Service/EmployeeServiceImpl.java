@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.EmployeeRepository;
 import employeemanagement.com.employees.Model.Employee;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         this.employeeRepository = employeeRepository;
     }
     @Override
+    @Transactional
     public Employee save(Employee theEmployee) {
         return employeeRepository.save(theEmployee);
     }
@@ -38,6 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    @Transactional
     public Employee update(int emp_id, Employee updatedEmployee) {
         Employee existingEmployee = employeeRepository.findById(emp_id).orElse(null);
         if (existingEmployee != null) {
@@ -57,6 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    @Transactional
     public void deleteById(int emp_id) {
             employeeRepository.deleteById(emp_id);
     }

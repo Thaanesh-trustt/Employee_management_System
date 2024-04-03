@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.DepartmentRepository;
 import employeemanagement.com.employees.Model.Department;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
+    @Transactional
     public Department save(Department theDepartment) {
         return theDepartmentRepository.save(theDepartment);
     }

@@ -53,5 +53,4 @@ public class PayrollController {
     {
        thePayrollService.deleteById(payroll_id);
     }
-
 }
