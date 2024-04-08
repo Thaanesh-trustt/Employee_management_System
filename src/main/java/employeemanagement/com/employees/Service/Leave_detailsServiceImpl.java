@@ -6,6 +6,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -49,7 +52,6 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
         Optional<Leave_details> leaveDetailsOptional = theLeave_detailsRepository.findById(leave_id);
             if (leaveDetailsOptional.isPresent()) {
                 Leave_details existingLeaveDetails = leaveDetailsOptional.get();
-                // Update the fields with new values
                 existingLeaveDetails.setLeave_type(updateLeave_details.getLeave_type());
                 existingLeaveDetails.setFrom_date(updateLeave_details.getFrom_date());
                 existingLeaveDetails.setTo_date(updateLeave_details.getTo_date());
@@ -60,11 +62,25 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
             }
             return null;
             }
+            @Override
+           @Transactional
+           public void deleteById(int leave_id) {
+         theLeave_detailsRepository.deleteById(leave_id);
+    }
 
     @Override
-    @Transactional
-    public void deleteById(int leave_id) {
-         theLeave_detailsRepository.deleteById(leave_id);
+    public long CalculatingLeaves(int empId) {
+        // Find the Leave_details object associated with the empId
+        Optional <Leave_details> leave_detailsOptional  = theLeave_detailsRepository.findById(empId);
+        if (leave_detailsOptional == null) {
+            throw new RuntimeException("No leave details found for employee id: " + empId);
+        }
+        Leave_details leave_details = leave_detailsOptional.get();
+        LocalDate fromDate = leave_details.getFrom_date();
+        LocalDate toDate = leave_details.getTo_date();
+        long howManyDays = ChronoUnit.DAYS.between(fromDate, toDate);
+
+        return howManyDays ;
     }
 
 }

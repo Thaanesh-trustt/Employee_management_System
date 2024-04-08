@@ -13,4 +13,5 @@ public interface Leave_detailsService {
 
     void deleteById(int leave_id);
 
+   long CalculatingLeaves(int empId);
 }

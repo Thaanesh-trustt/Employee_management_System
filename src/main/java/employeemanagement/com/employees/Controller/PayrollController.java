@@ -49,7 +49,7 @@ public class PayrollController {
         }
         return thePayroll;
     } @DeleteMapping("/payroll/{payroll_id}")
-    private void deleteEmployee(@PathVariable("payroll_id") int payroll_id)
+    public void deleteEmployee(@PathVariable("payroll_id") int payroll_id)
     {
        thePayrollService.deleteById(payroll_id);
     }

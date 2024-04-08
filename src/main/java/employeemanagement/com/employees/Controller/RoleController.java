@@ -42,7 +42,7 @@ public class RoleController {
         return theRoleService.update(id, updatedRole);
     }
     @DeleteMapping("/Roles/{role_id}")
-    private void deleteById(@PathVariable("role_id") int role_id) {
+    public  void deleteById(@PathVariable("role_id") int role_id) {
         theRoleService.deleteById(role_id);
     }
 }
