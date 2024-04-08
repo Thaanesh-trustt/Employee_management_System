@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Department;
 import employeemanagement.com.employees.Service.DepartmentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 //added rest controller
 //added cross origin
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class DepartmentController {
     private DepartmentService theDepartmentService;
 
@@ -35,7 +36,7 @@ public class DepartmentController {
         Department theDepartment=theDepartmentService.findById(dept_id);
         if(theDepartment==null)
         {
-            throw new RuntimeException("Department id not found" +dept_id);
+            throw new EntityNotFoundException("Department id not found" +dept_id);
         }
         return theDepartment;
     }

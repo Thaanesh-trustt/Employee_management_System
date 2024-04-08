@@ -11,12 +11,12 @@ import java.util.List;
 //added rest controller
 //added cross origin
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class Leave_detailsController {
     private Leave_detailsService theLeave_detailsService;
     private EmployeeService theEmployeeService;
-    @Autowired
 
+    @Autowired
     public Leave_detailsController(Leave_detailsService theLeave_detailsService, EmployeeService employeeService) {
         this.theLeave_detailsService = theLeave_detailsService;
         theEmployeeService = employeeService;
