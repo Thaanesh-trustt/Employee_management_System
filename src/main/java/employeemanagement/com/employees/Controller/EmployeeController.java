@@ -13,7 +13,7 @@ import java.util.List;
 //added rest controller
 //added cross origin
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 //@RequestMapping("/api")
 public class EmployeeController {
     private EmployeeService employeeService;
@@ -53,8 +53,7 @@ public class EmployeeController {
     }
     @GetMapping("/employee/{email}")
     public Employee getEmail(@PathVariable(value="email") String email){
-        Employee theEmployee = employeeService.findByEmail(email);
-        return theEmployee;
+      return employeeService.findByEmail(email);
     }
     @PutMapping("/employees/{emp_id}")
     public Employee updateEmployee(@PathVariable int emp_id, @RequestBody Employee updatedEmployee) {

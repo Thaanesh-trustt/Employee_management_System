@@ -11,12 +11,12 @@ import java.util.List;
 //added rest controller
 //added cross origin
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class Leave_detailsController {
     private Leave_detailsService theLeave_detailsService;
     private EmployeeService theEmployeeService;
-    @Autowired
 
+    @Autowired
     public Leave_detailsController(Leave_detailsService theLeave_detailsService, EmployeeService employeeService) {
         this.theLeave_detailsService = theLeave_detailsService;
         theEmployeeService = employeeService;
@@ -36,8 +36,7 @@ public class Leave_detailsController {
     @GetMapping("/Leave_details/{leave_id}")
     public Leave_details findById(@PathVariable int leave_id)
     {
-        Leave_details theLeave_details=theLeave_detailsService.findById(leave_id);
-        return theLeave_details;
+        return theLeave_detailsService.findById(leave_id);
     }
     @PutMapping("/Leave_details/{leave_id}")
     public Leave_details updateLeave_details(@PathVariable int leave_id, @RequestBody  Leave_details updateLeave_details)

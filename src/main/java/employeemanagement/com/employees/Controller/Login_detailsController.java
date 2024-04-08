@@ -5,6 +5,7 @@ import employeemanagement.com.employees.Model.Login_details;
 import employeemanagement.com.employees.Model.Role;
 import employeemanagement.com.employees.Service.EmployeeService;
 import employeemanagement.com.employees.Service.Login_detailsService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.util.Map;
 //added rest controller
 //added cross origin
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class Login_detailsController {
     private Login_detailsService theLogin_detailsService;
     private EmployeeService theEmployeeService;
@@ -30,8 +31,7 @@ public class Login_detailsController {
     @PostMapping("/addId")
     public Login_details addLogin_details(@RequestBody  Login_details theLogin_Details)
     {
-        Login_details login=theLogin_detailsService.save(theLogin_Details);
-        return login;
+        return theLogin_detailsService.save(theLogin_Details);
     }
     @PostMapping("/login")
     public ResponseEntity<Map<String,Object>> login(@RequestBody Login_details thelogin){
@@ -80,7 +80,7 @@ public class Login_detailsController {
         Login_details login=theLogin_detailsService.findById(id);
         if(login==null)
         {
-            throw new RuntimeException("id not found "+id);
+            throw new EntityNotFoundException("id not found "+id);
         }
         return login;
     }
@@ -94,10 +94,9 @@ public class Login_detailsController {
     {
         theLogin_detailsService.deleteById(id);
     }
-
-//    @GetMapping("/getEmail")
-//    public Login_details findByEmail(@RequestBody String email){
-//        System.out.println(email);
-//        return theLogin_detailsService.findByEmail(email);
-//    }
+    @GetMapping("/Logins/{email}")
+    public Login_details findByEmail(@PathVariable(value="email") String email)
+    {
+        return theLogin_detailsService.findByEmail(email);
+    }
 }

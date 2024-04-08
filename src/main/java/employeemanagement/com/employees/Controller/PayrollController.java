@@ -4,6 +4,7 @@ import employeemanagement.com.employees.Model.Employee;
 import employeemanagement.com.employees.Model.Payroll;
 import employeemanagement.com.employees.Service.EmployeeService;
 import employeemanagement.com.employees.Service.PayrollService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 //added rest controller
 //added cross origin
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class PayrollController {
     private PayrollService thePayrollService;
     private EmployeeService theEmployeService;
@@ -45,7 +46,7 @@ public class PayrollController {
     Payroll thePayroll=thePayrollService.findById(payroll_id);
         if(thePayroll==null)
         {
-            throw new RuntimeException("Payroll id not found -" + payroll_id);
+            throw new EntityNotFoundException("Payroll id not found -" + payroll_id);
         }
         return thePayroll;
     } @DeleteMapping("/payroll/{payroll_id}")

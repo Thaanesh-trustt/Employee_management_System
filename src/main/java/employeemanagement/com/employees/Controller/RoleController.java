@@ -9,7 +9,7 @@ import java.util.List;
 //added rest controller
 //added cross origin
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class RoleController {
     private RoleService theRoleService;
     @Autowired
