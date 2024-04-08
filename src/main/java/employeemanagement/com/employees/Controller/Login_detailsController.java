@@ -31,8 +31,7 @@ public class Login_detailsController {
     @PostMapping("/addId")
     public Login_details addLogin_details(@RequestBody  Login_details theLogin_Details)
     {
-        Login_details login=theLogin_detailsService.save(theLogin_Details);
-        return login;
+        return theLogin_detailsService.save(theLogin_Details);
     }
     @PostMapping("/login")
     public ResponseEntity<Map<String,Object>> login(@RequestBody Login_details thelogin){

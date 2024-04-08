@@ -36,8 +36,7 @@ public class Leave_detailsController {
     @GetMapping("/Leave_details/{leave_id}")
     public Leave_details findById(@PathVariable int leave_id)
     {
-        Leave_details theLeave_details=theLeave_detailsService.findById(leave_id);
-        return theLeave_details;
+        return theLeave_detailsService.findById(leave_id);
     }
     @PutMapping("/Leave_details/{leave_id}")
     public Leave_details updateLeave_details(@PathVariable int leave_id, @RequestBody  Leave_details updateLeave_details)
