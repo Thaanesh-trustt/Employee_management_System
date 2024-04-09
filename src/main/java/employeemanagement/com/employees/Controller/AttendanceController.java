@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -53,4 +54,14 @@ public class AttendanceController {
     void deleteById(@PathVariable int id){
         attendanceService.deleteById(id);
     }
+
+    @GetMapping("/attendance/status/{emp_id}")
+    public String getAttendanceStatus(@PathVariable int emp_id, @RequestParam LocalDate presentdate){
+        return attendanceService.getAttendanceStatus(emp_id, presentdate);
+    }
+    @GetMapping("/attendance/dailyWorkingHours/{emp_id}")
+    public double dailyWorkingHours(@PathVariable int emp_id, @RequestParam LocalDate presentdate){
+        return attendanceService.dailyWorkingHours(emp_id, presentdate);
+    }
+
 }

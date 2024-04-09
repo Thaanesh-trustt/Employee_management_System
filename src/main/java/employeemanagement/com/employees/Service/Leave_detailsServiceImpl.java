@@ -78,9 +78,10 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
         Leave_details leave_details = leave_detailsOptional.get();
         LocalDate fromDate = leave_details.getFrom_date();
         LocalDate toDate = leave_details.getTo_date();
-        long howManyDays = ChronoUnit.DAYS.between(fromDate, toDate);
+        long Days = ChronoUnit.DAYS.between(fromDate, toDate);
+        System.out.print("Days:");
+        return Days ;
 
-        return howManyDays ;
     }
 
 }

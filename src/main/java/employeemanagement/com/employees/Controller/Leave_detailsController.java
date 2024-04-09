@@ -53,5 +53,6 @@ public class Leave_detailsController {
     public long CalculatingLeaves(@PathVariable int empId)
     {
         return theLeave_detailsService.CalculatingLeaves(empId);
+
     }
 }
