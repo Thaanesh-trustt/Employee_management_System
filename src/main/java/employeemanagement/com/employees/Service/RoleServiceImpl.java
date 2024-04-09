@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.RoleRepository;
 import employeemanagement.com.employees.Model.Role;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,17 +37,18 @@ public class RoleServiceImpl implements RoleService {
         if (result.isPresent()) {
             theRole = result.get();
         } else {
-            throw new RuntimeException("Role_id not found" + role_id);
+            throw new EntityNotFoundException("Role_id not found" + role_id);
         }
         return theRole;
     }
 
     public Role update(int id, Role updatedRole) {
-        Role existingRole = roleRepository.findById(id).orElse(null);
-        if (existingRole != null) {
-            existingRole.setRole_name(updatedRole.getRole_name());
-
+        Optional<Role> existingRoleOptional = roleRepository.findById(id);
+        if (!existingRoleOptional.isPresent()) {
+            throw new EntityNotFoundException("Role not found for id: " + id);
         }
+        Role existingRole = existingRoleOptional.get();
+        existingRole.setRole_name(updatedRole.getRole_name());
         return roleRepository.save(existingRole);
     }
 

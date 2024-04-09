@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.EmployeeRepository;
 import employeemanagement.com.employees.Model.Employee;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         if (result.isPresent()) {
             theEmployee = result.get();
         } else {
-            throw new RuntimeException("Id not found - " + id);
+            throw new EntityNotFoundException("Id not found - " + id);
         }
         return theEmployee;
     }
@@ -53,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService{
             return employeeRepository.save(existingEmployee);
         }
         else {
-            throw new RuntimeException("Employee with ID " + emp_id + " not found");
+            throw new EntityNotFoundException("Employee with ID " + emp_id + " not found");
         }
 
 

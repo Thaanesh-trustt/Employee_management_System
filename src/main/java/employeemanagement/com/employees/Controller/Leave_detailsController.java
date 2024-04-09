@@ -52,7 +52,6 @@ public class Leave_detailsController {
     @GetMapping("/Leave_details/calculate/{empId}")
     public long CalculatingLeaves(@PathVariable int empId)
     {
-//        Leave_details DAYS = new Leave_details();
         return theLeave_detailsService.CalculatingLeaves(empId);
     }
 }

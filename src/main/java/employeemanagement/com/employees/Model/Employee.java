@@ -147,12 +147,4 @@ public class Employee {
                 '}';
     }
 
-//    adding convenience method for bi-directional mapping
-//    public  void add(Attendance tempAttendance){
-//        if(attendance == null){
-//            attendance = new ArrayList<>();
-//        }
-//        attendance.add(tempAttendance);
-//        tempAttendance.setEmployee(this);
-//    }
 }

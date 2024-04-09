@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.AttendanceRepository;
 import employeemanagement.com.employees.Model.Attendance;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         }
         else
         {
-            throw new RuntimeException("Attendance id not found" + id);
+            throw new EntityNotFoundException("Attendance id not found" + id);
         }
         return theAttendance;
     }
@@ -52,7 +53,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         }
         else
         {
-            throw new RuntimeException("Attendance id not found" + id);
+            throw new EntityNotFoundException("Attendance id not found" + id);
         }
     }
 

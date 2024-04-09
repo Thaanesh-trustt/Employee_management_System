@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.DepartmentRepository;
 import employeemanagement.com.employees.Model.Department;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         }
         else
         {
-            throw new RuntimeException("Department id not found" + id);
+            throw new EntityNotFoundException("Department id not found" + id);
         }
         return theDepartment;
     }
@@ -52,7 +53,6 @@ public class DepartmentServiceImpl implements DepartmentService{
     public Department update(int dept_id, Department updateDepartment) {
         Department existingDepartment = theDepartmentRepository.findById(dept_id).orElse(null);
         if (existingDepartment != null) {
-            //existingDepartment.setDept_id(updateDepartment.getDept_id());
             existingDepartment.setName(updateDepartment.getName());
             return theDepartmentRepository.save(existingDepartment);
         }

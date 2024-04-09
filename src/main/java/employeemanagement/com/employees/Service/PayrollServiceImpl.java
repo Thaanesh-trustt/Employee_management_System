@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.PayrollRepository;
 import employeemanagement.com.employees.Model.Payroll;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class PayrollServiceImpl implements PayrollService{
             }
             else
             {
-                throw new RuntimeException("payroll id not found" + payroll_id);
+                throw new EntityNotFoundException("payroll id not found" + payroll_id);
             }
             return thePayroll;
         }

@@ -50,7 +50,7 @@ public class AttendanceController {
     }
 
     @DeleteMapping("/attendance/{id}")
-    private void deleteById(@PathVariable int id){
+    void deleteById(@PathVariable int id){
         attendanceService.deleteById(id);
     }
 }

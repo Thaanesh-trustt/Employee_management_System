@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Controller;
 
 import employeemanagement.com.employees.Model.Role;
 import employeemanagement.com.employees.Service.RoleService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public class RoleController {
         Role theRole=theRoleService.findById(role_id);
         if(theRole==null)
         {
-            throw new RuntimeException("Role id not found" +role_id);
+            throw new EntityNotFoundException("Role id not found" +role_id);
         }
         return theRole;
     }

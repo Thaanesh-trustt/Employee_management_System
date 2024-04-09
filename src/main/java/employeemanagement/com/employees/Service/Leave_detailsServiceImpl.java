@@ -2,6 +2,7 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.Leave_detailsRepository;
 import employeemanagement.com.employees.Model.Leave_details;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
         }
         else
         {
-            throw new RuntimeException("leave_id not found" + leave_id);
+            throw new EntityNotFoundException("leave_id not found" + leave_id);
         }
         return leaveDetails;
     }
@@ -70,10 +71,9 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
 
     @Override
     public long CalculatingLeaves(int empId) {
-        // Find the Leave_details object associated with the empId
-        Optional <Leave_details> leave_detailsOptional  = theLeave_detailsRepository.findById(empId);
-        if (leave_detailsOptional == null) {
-            throw new RuntimeException("No leave details found for employee id: " + empId);
+        Optional<Leave_details> leave_detailsOptional  = theLeave_detailsRepository.findById(empId);
+        if (!leave_detailsOptional.isPresent()) {
+            throw new EntityNotFoundException("No leave details found for employee id: " + empId);
         }
         Leave_details leave_details = leave_detailsOptional.get();
         LocalDate fromDate = leave_details.getFrom_date();

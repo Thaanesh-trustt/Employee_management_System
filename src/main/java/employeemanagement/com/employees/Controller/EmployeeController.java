@@ -6,6 +6,7 @@ import employeemanagement.com.employees.Model.Role;
 import employeemanagement.com.employees.Service.DepartmentService;
 import employeemanagement.com.employees.Service.EmployeeService;
 import employeemanagement.com.employees.Service.RoleService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +48,7 @@ public class EmployeeController {
         Employee theEmployee=employeeService.findById(emp_id);
         if(theEmployee==null)
         {
-            throw new RuntimeException("Employee id not found -" + emp_id);
+            throw new EntityNotFoundException("Employee id not found -" + emp_id);
         }
         return theEmployee;
     }

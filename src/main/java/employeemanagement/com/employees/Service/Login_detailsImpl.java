@@ -2,7 +2,9 @@ package employeemanagement.com.employees.Service;
 
 import employeemanagement.com.employees.DAO.Login_detailsRepository;
 import employeemanagement.com.employees.Model.Login_details;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import org.hibernate.query.sqm.EntityTypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +41,7 @@ public class Login_detailsImpl implements Login_detailsService{
         }
         else
         {
-            throw new RuntimeException("id not found " + id);
+            throw new EntityNotFoundException("id not found " + id);
         }
         return theLogin;
     }

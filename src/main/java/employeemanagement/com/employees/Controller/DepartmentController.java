@@ -45,7 +45,7 @@ public class DepartmentController {
         return theDepartmentService.update(dept_id, updateDepartment);
     }
     @DeleteMapping("/Departments/{dept_id}")
-    private void deleteById(@PathVariable("dept_id") int dept_id)
+     void deleteById(@PathVariable("dept_id") int dept_id)
     {
         theDepartmentService.deleteById(dept_id);
     }
