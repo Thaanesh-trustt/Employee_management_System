@@ -29,6 +29,8 @@ public class Leave_details {
     @Column(name="reason")
     private String reason;
 
+    @Column(name="status")
+    private String status;
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="emp_id")
     private Employee employee;
