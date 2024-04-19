@@ -5,6 +5,8 @@ import employeemanagement.com.employees.Model.Leave_details;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @Service
 public class Leave_detailsServiceImpl implements Leave_detailsService{
     private Leave_detailsRepository theLeave_detailsRepository;
+    private static final Logger logger = LoggerFactory.getLogger(Leave_detailsServiceImpl.class);
     @Autowired
 
     public Leave_detailsServiceImpl(Leave_detailsRepository theLeave_detailsRepository) {
@@ -79,9 +82,9 @@ public class Leave_detailsServiceImpl implements Leave_detailsService{
         LocalDate fromDate = leave_details.getFrom_date();
         LocalDate toDate = leave_details.getTo_date();
         long Days = ChronoUnit.DAYS.between(fromDate, toDate);
-        System.out.print("Days:");
+        logger.info("Days:");
         return Days ;
+    }
 
     }
 
-}
